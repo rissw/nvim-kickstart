@@ -11,6 +11,7 @@ return {
       'nvim-treesitter/nvim-treesitter',
     },
     config = function()
+      require('ibl').setup()
       require('go').setup()
     end,
     event = { 'CmdlineEnter' },
