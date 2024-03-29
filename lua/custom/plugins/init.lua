@@ -29,10 +29,10 @@ return {
       vim.keymap.set('n', '<leader>zm', ':ZenMode<cr>', { desc = '[Z]en [M]ode' })
     end,
   },
-  -- {
-  --   'Exafunction/codeium.vim',
-  --   event = 'BufEnter',
-  -- },
+  {
+    'Exafunction/codeium.vim',
+    event = 'BufEnter',
+  },
   {
     'NeogitOrg/neogit',
     dependencies = {
