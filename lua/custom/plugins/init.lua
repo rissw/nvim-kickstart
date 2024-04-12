@@ -11,7 +11,14 @@ return {
       'nvim-treesitter/nvim-treesitter',
     },
     config = function()
-      require('ibl').setup()
+      local format_sync_grp = vim.api.nvim_create_augroup('GoFormat', {})
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        pattern = '*.go',
+        callback = function()
+          require('go.format').goimport()
+        end,
+        group = format_sync_grp,
+      })
       require('go').setup()
     end,
     event = { 'CmdlineEnter' },
@@ -22,17 +29,19 @@ return {
     'folke/zen-mode.nvim',
     opts = {
       window = {
-        width = 0.7,
+        backdrop = 0.95,
+        width = 120, -- width of the Zen window
+        height = 1, -- height of the Zen window
       },
     },
     config = function()
       vim.keymap.set('n', '<leader>zm', ':ZenMode<cr>', { desc = '[Z]en [M]ode' })
     end,
   },
-  {
-    'Exafunction/codeium.vim',
-    event = 'BufEnter',
-  },
+  -- {
+  --   'Exafunction/codeium.vim',
+  --   event = 'BufEnter',
+  -- },
   {
     'NeogitOrg/neogit',
     dependencies = {
@@ -44,5 +53,15 @@ return {
       -- "ibhagwan/fzf-lua",              -- optional
     },
     config = true,
+  },
+
+  {
+    'VonHeikemen/fine-cmdline.nvim',
+    dependencies = {
+      'MunifTanjim/nui.nvim',
+    },
+    config = function()
+      vim.keymap.set('n', ':', '<cmd>FineCmdline<CR>', { noremap = true })
+    end,
   },
 }
