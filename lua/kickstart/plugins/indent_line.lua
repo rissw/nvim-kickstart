@@ -6,7 +6,10 @@ return {
     main = 'ibl',
     opts = {
       -- indent = { tab_char = '┊' },
-      indent = { tab_char = '▎' },
+      indent = {
+        char = '▏',
+        tab_char = '▏',
+      },
     },
   },
 }
