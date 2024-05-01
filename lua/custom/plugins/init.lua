@@ -29,8 +29,8 @@ return {
     'folke/zen-mode.nvim',
     opts = {
       window = {
-        backdrop = 0.95,
-        width = 120, -- width of the Zen window
+        backdrop = 0.5,
+        width = 0.9, -- width of the Zen window
         height = 1, -- height of the Zen window
       },
     },
@@ -61,7 +61,7 @@ return {
       'MunifTanjim/nui.nvim',
     },
     config = function()
-      vim.keymap.set('n', ':', '<cmd>FineCmdline<CR>', { noremap = true })
+      vim.keymap.set('n', '<leader>:', '<cmd>FineCmdline<CR>', { noremap = true })
     end,
   },
 }
