@@ -30,12 +30,18 @@ return {
     opts = {
       window = {
         backdrop = 0.5,
-        width = 0.9, -- width of the Zen window
-        height = 1, -- height of the Zen window
+        -- width = 0.5, -- width of the Zen window
+        -- height = 1, -- height of the Zen window
       },
     },
     config = function()
-      vim.keymap.set('n', '<leader>zm', ':ZenMode<cr>', { desc = '[Z]en [M]ode' })
+      -- vim.keymap.set('n', '<leader>zm', ':ZenMode<cr>', { desc = '[Z]en [M]ode' })
+      vim.keymap.set('n', '<leader>zm', ':lua require("zen-mode").toggle({window={width = .9}})<cr>', { desc = '[Z]en [M]ode' })
+      vim.keymap.set('n', '<leader>zn', ':lua require("zen-mode").toggle({window={width = .85}})<cr>', { desc = '[Z]en [M]ode' })
+      vim.keymap.set('n', '<leader>zb', ':lua require("zen-mode").toggle({window={width = .80}})<cr>', { desc = '[Z]en [M]ode' })
+      vim.keymap.set('n', '<leader>zv', ':lua require("zen-mode").toggle({window={width = .75}})<cr>', { desc = '[Z]en [M]ode' })
+      vim.keymap.set('n', '<leader>zc', ':lua require("zen-mode").toggle({window={width = .70}})<cr>', { desc = '[Z]en [M]ode' })
+      vim.keymap.set('n', '<leader>zz', ':lua require("zen-mode").toggle({window={width = 150}})<cr>', { desc = '[Z]en [M]ode' })
     end,
   },
   -- {
@@ -62,6 +68,16 @@ return {
     },
     config = function()
       vim.keymap.set('n', '<leader>:', '<cmd>FineCmdline<CR>', { noremap = true })
+      -- vim.api.nvim_set_keymap('n', '<leader>:', '<cmd>FineCmdline<CR>', { noremap = true })
     end,
+  },
+  {
+    'iamcco/markdown-preview.nvim',
+    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
+    build = 'cd app && yarn install',
+    init = function()
+      vim.g.mkdp_filetypes = { 'markdown' }
+    end,
+    ft = { 'markdown' },
   },
 }

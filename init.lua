@@ -598,6 +598,10 @@ require('lazy').setup({
             },
           },
         },
+
+        -- sourcekit = {
+        --   filetypes = { 'swift', 'objc', 'objcpp', 'swiftinterface' },
+        -- },
       }
 
       -- Ensure the servers and tools above are installed
@@ -612,7 +616,7 @@ require('lazy').setup({
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        'stylua', -- Used to format Lua code
+        'stylua', -- Used to format Lua codes
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -628,6 +632,11 @@ require('lazy').setup({
           end,
         },
       }
+
+      vim.lsp.config('sourcekit', {
+        filetypes = { 'swift', 'swiftinterface' },
+      })
+      vim.lsp.enable 'sourcekit'
     end,
   },
 
@@ -908,6 +917,18 @@ require('lazy').setup({
   },
 })
 
+local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
+parser_config.swift = {
+  install_info = {
+    url = '/home/rads/source/tree-sitter-swift', -- local path or git repo
+    files = { 'src/parser.c' }, -- note that some parsers also require src/scanner.c or src/scanner.cc
+    -- optional entries:
+    branch = 'main', -- default branch in case of git repo if different from master
+    generate_requires_npm = false, -- if stand-alone parser without npm dependencies
+    requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
+  },
+  -- filetype = "zu", -- if filetype does not match the parser name
+}
 -- require('ibl').setup {
 --   indent = { char = '┊' },
 -- }
